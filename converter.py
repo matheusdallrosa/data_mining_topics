@@ -28,5 +28,10 @@ for row in sys.stdin:
         new_line += str(convert_float(info[i]))+";"        
     new_line += info[30].split('"')[1]+";"
     new_line += info[31].split('"')[1]+";"
-    new_line += info[32].split('\n')[0]
+    final_grade = int(info[32].split('\n')[0])
+    if final_grade <= 3: new_line += "1"
+    elif final_grade <= 7: new_line += "2"
+    elif final_grade <= 13: new_line += "3"
+    elif final_grade <= 17: new_line += "4"
+    elif final_grade <= 20: new_line += "5"
     print(new_line)
