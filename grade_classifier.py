@@ -12,9 +12,20 @@ def convert_float(data):
     if data in reputation: return reputation[data]
     return data
 
-features, targets = [], []
+base = []
+for row in sys.stdin:
+    base.append(row)
+
 useless_features = [0,1,4,8,9,11]
-for student in sys.stdin:
+features, targets = [], []
+
+check_train = 0
+test_idx = {1,51,101,151,201,251,301,351,401,451,501,551,601}
+test_features, test_targets = [], []
+for student in base:
+    #to check if this student is for tests.
+    check_train += 1
+    #the input row came from a csv file.
     student_info = student.split(';')
 
     #features of the given student.
@@ -22,16 +33,23 @@ for student in sys.stdin:
     usefull_features_numeric = []
     for f in usefull_features_str:        
         usefull_features_numeric.append(convert_float(f)) 
-    features.append(usefull_features_numeric)
     
-    #grades of the given student.
-    #for g in student_info[30:33]:
-    #  print(g)
-    #  targets.append(float(g.split('"')[1]))
+    if check_train in test_idx:
+        test_features.append(usefull_features_numeric)
+        test_targets.append(student_info[32])
+    else:
+        features.append(usefull_features_numeric)
 
-    #first we'll focus on the final grade.
-    targets.append(student_info[32])
+        #grades of the given student.
+        #for g in student_info[30:33]:
+        #  print(g)
+        #  targets.append(float(g.split('"')[1]))
+
+        #first we'll focus on the final grade.
+        targets.append(student_info[32])
 
 clf = tree.DecisionTreeClassifier()
 clf.fit(features,targets)
-print(clf.score(features,targets))
+print(clf.score(test_features,test_targets))
+print(test_targets)
+print(clf.predict(test_features,test_targets))
