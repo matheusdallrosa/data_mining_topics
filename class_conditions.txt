@@ -1,0 +1,21 @@
+k=5
+if final_grade <= 9: new_line += "1"
+elif final_grade <= 11: new_line += "2"
+elif final_grade <= 13: new_line += "3"
+elif final_grade <= 15: new_line += "4"
+elif final_grade <= 20: new_line += "5"
+
+k=4
+if final_grade <= 9: new_line += "1"
+elif final_grade <= 13: new_line += "2"
+elif final_grade <= 17: new_line += "3"
+elif final_grade <= 20: new_line += "4"
+
+k=3
+if final_grade <= 9: new_line += "1"
+elif final_grade <= 15: new_line += "2"
+elif final_grade <= 20: new_line += "3"
+
+k=2
+if final_grade <= 9: new_line += "1"
+elif final_grade <= 20: new_line += "2"
